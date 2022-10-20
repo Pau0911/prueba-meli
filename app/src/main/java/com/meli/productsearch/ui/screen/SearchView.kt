@@ -43,76 +43,82 @@ fun SearchView(
     val keyboardController = LocalSoftwareKeyboardController.current
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
+    val maxChar= 30
 
-    TopAppBar(backgroundColor = color_primary) {
-    }
-
-
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .background(Color.White),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-
-    ) {
-        BackgroundContent()
-        Spacer(modifier = Modifier.height(24.dp))
-        TextField(
-            value = text,
-            shape = RoundedCornerShape(15.dp),
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                backgroundColor = color_primary,
+                elevation = 10.dp
+            ){}
+        }){
+        Column(
             modifier = Modifier
-                .padding(start = 10.dp, end = 10.dp)
-                .onFocusEvent { focusState ->
-                    if (focusState.isFocused) {
-                        coroutineScope.launch {
-                            bringIntoViewRequester.bringIntoView()
-                        }
-                    }
-                },
-            textStyle = TextStyle(color = Color.Black, fontWeight = FontWeight.Normal),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Icono de buscar"
-                )
-            },
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = color_background,
-                cursorColor = Color.Black,
-                disabledLabelColor = Color.Blue,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-            ),
-            onValueChange = { newText ->
-                text = newText
-            },
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() }),
-            placeholder = {
-                Text(
-                    text = "Buscar un producto", fontFamily = Fonts,
-                    fontWeight = FontWeight.Light
-                )
-            },
-        )
-        Button(
-            onClick = {
-                if (text.isNotEmpty()) goToResultsView(text) else Toast.makeText(
-                    context,
-                    "Por favor ingresar busqueda",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }, colors = ButtonDefaults.buttonColors(backgroundColor = button_primary),
-            modifier = Modifier.padding(top = 10.dp)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .background(Color.White),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+
         ) {
-            Text(text = "Buscar", color = Color.White)
+            BackgroundContent()
+            Spacer(modifier = Modifier.height(24.dp))
+            TextField(
+                value = text,
+                shape = RoundedCornerShape(15.dp),
+                modifier = Modifier
+                    .padding(start = 10.dp, end = 10.dp)
+                    .onFocusEvent { focusState ->
+                        if (focusState.isFocused) {
+                            coroutineScope.launch {
+                                bringIntoViewRequester.bringIntoView()
+                            }
+                        }
+                    },
+                textStyle = TextStyle(color = Color.Black, fontWeight = FontWeight.Normal),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Icono de buscar"
+                    )
+                },
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = color_background,
+                    cursorColor = Color.Black,
+                    disabledLabelColor = Color.Blue,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                ),
+                onValueChange = {
+                    if (it.length <= maxChar) text = it
+
+                },
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() }),
+                placeholder = {
+                    Text(
+                        text = "Buscar un producto", fontFamily = Fonts,
+                        fontWeight = FontWeight.Light
+                    )
+                },
+            )
+            Button(
+                onClick = {
+                    if (text.isNotEmpty()) goToResultsView(text) else Toast.makeText(
+                        context,
+                        "Por favor ingresar busqueda",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }, colors = ButtonDefaults.buttonColors(backgroundColor = button_primary),
+                modifier = Modifier.padding(top = 10.dp)
+            ) {
+                Text(text = "Buscar", color = Color.White)
+
+            }
 
         }
-
     }
+
 }
 
 

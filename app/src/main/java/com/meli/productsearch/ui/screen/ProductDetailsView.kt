@@ -191,7 +191,7 @@ fun ContentCard(productDetails: ProductDetails, context: Context) {
 
 @Composable
 fun AtributteList(productDetails: ProductDetails) {
-    val list = productDetails?.attributes.subList(0, 4)
+    val list = productDetails?.attributes
     Column() {
         list.forEach { item ->
             Atributte(item)

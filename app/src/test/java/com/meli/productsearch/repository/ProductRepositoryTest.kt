@@ -6,12 +6,10 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNull
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -49,7 +47,7 @@ class ProductRepositoryTest {
     }
 
     @Test
-    fun `test Api succeeds`() = runBlocking {
+    fun testApisucceeds() = runBlocking {
         whenever(api.getProduct("MCO991847965")).thenReturn(productDetail)
         repository.getDetailProduct("MCO991847965").collect {
             assertEquals(product, it)
@@ -57,7 +55,7 @@ class ProductRepositoryTest {
     }
 
     @Test
-    fun `if api failed then return null`() = runBlocking {
+    fun ifApiFailedThenReturnNull() = runBlocking {
         val error = NullPointerException("null pointer")
         whenever(api.getProduct("MCO991847965")).thenThrow(error)
         repository.getDetailProduct("MCO991847965").catch {
