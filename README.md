@@ -9,7 +9,7 @@ Este proyecto consta de una aplicación móvil que hace una busqueda de cualquie
 * Inyección de dependecias Hilt - Dagger
 * Consumo de servicios Retrofit2
 * Creación de las vistas jetpack-compose
-* Navegación entre vistas jetcak-Navigation
+* Navegación entre vistas jetpack-Navigation
 
 **Pantallazos de la aplicación**
 
