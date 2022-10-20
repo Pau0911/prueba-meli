@@ -195,19 +195,6 @@ fun ProductImage(
             .clip(shape = RoundedCornerShape(12.dp)),
         contentScale = ContentScale.Crop
     )
-
 }
 
 
-@Composable
-fun ProductTitle(
-    title: String, modifier: Modifier = Modifier
-) {
-    Text(
-        modifier = modifier,
-        text = title,
-        maxLines = 2,
-        style = MaterialTheme.typography.h6,
-        overflow = TextOverflow.Ellipsis
-    )
-}
