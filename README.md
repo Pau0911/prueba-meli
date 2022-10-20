@@ -13,7 +13,7 @@ Este proyecto consta de una aplicación móvil que hace una busqueda de cualquie
 
 **Pantallazos de la aplicación**
 
-* Pantalla de busqueda
+* Pantalla de búsqueda
 
 
 ![prueba](https://user-images.githubusercontent.com/34459684/197048255-3ffd11be-7ce3-45a8-944f-03a1f44f4fee.png)
