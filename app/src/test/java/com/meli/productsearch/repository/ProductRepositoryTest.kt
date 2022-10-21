@@ -39,14 +39,6 @@ class ProductRepositoryTest {
     }
 
     @Test
-    fun validateGetProduct() = runBlocking {
-//        whenever(repository.getDetailProduct("MCO991847965")).thenReturn(productDetail)
-//        repository.getDetailProduct("MCO991847965").collect {
-//            assertEquals(productDetail, it)
-//        }
-    }
-
-    @Test
     fun testApisucceeds() = runBlocking {
         whenever(api.getProduct("MCO991847965")).thenReturn(productDetail)
         repository.getDetailProduct("MCO991847965").collect {
